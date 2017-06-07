@@ -1,0 +1,30 @@
+{
+  "name": "repair-my-ship",
+  "version": "1.0.0",
+  "description": "A site where people can share about their relationships.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayvid14/repair-my-ship.git"
+  },
+  "author": "Divyam Nandanwar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mayvid14/repair-my-ship/issues"
+  },
+  "homepage": "https://github.com/mayvid14/repair-my-ship#readme",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jquery": "^3.2.1",
+    "materialize-css": "^0.98.2",
+    "mongoose": "^4.10.5",
+    "ng-storage": "^0.3.2",
+    "underscore": "^1.8.3"
+  }
+}
