@@ -11,7 +11,11 @@ app.use('/nm',express.static(path.join(__dirname,'node_modules')))
 
 app.get('/',function(req,res){
     res.sendFile(path.join(__dirname,'public','views','main.html'));
-})
+});
+
+app.get('/login',function(req,res){
+    res.sendFile(path.join(__dirname,'public','views','login.html'));
+});
 
 app.listen(8080,function(){
     console.log('Connected to 8080');

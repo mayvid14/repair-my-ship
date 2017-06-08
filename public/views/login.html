@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Repair my 'ship</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="/nm/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="../styles/login.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--JS-->
+    <script src="/nm/jquery/dist/jquery.min.js"></script>
+    <script src="/nm/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="/nm/angular/angular.min.js"></script>
+    <script src="../configs/main.js"></script>
+</head>
+
+<body ng-app="rms">
+    <div class="row">
+        <div class="col s12 m8 l8 xl8 hide-on-small-only" id="slide">
+            <h1 class="light">Repair my 'ship <br><span class="small"><h4>A place to open up</h4></span></h1>
+        </div>
+        <div class="col s12 hide-on-med-and-up" id="smaller">
+            <h1 class="light">Repair my 'ship <br><span class="small"><h4>A place to open up</h4></span></h1>
+        </div>
+        <div class="col m4 l4 xl4 offset-m8 offset-l8 offset-xl8" id="log">
+            <h4 class="center">Login </h4>
+            <div class="row">
+                <form action="">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                    <button class="btn waves-effect waves-light red lighten-2 right" type="submit" name="action">Submit <i class="material-icons right">send</i> </button>
+                </form>
+            </div>
+            <div class="row center"> <a href="/signup">Not a member already? Sign up</a> </div>
+            <div class="row center">
+                <button class="btn btn-flat waves-effect waves-dark">Continue Anonymously</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

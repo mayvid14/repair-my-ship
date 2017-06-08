@@ -1,14 +1,11 @@
 <script>
     $('.collapsible').collapsible();
-    /*$('.pushpin').pushpin({
-        top: $('.pushpin').offset().top
-        , bottom: $('.pushpin').offset().top + $('.pushpin').outerHeight() - $('.pushpin').height()
-        , offset: 70
-    });*/
 </script>
 <div class="row">
     <div class="card col m3 l3 hide-on-small-only lp">
-        <div class="card-image"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" alt="" class="responsive-img"> </div>
+        <div class="card-image">
+            <div id="imgbck"><img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" alt="" class="responsive-img"></div>
+        </div>
         <div class="card-content">
             <ul class="collection">
                 <li class="collection-item"><span class="card-title">Mr. Ninja</span></li>
@@ -16,11 +13,11 @@
                 <li class="collection-item"><i class="material-icons">thumb_up</i> :124</li>
                 <li class="collection-item"><i class="material-icons">thumb_down</i> :32</li>
                 <li class="collection-item"><a href="/#!profile">View profile</a></li>
-            </ul> <span class="btn green">Log out</span> </div>
+            </ul> <button class="btn waves-effect waves-light green">Log out</button> </div>
     </div>
     <ul class="collapsible col s12 hide-on-med-and-up" data-collapsible="accordion">
         <li>
-            <div class="collapsible-header" id="profimg"><img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""><span>Mr. Ninja</span> <span class="btn green right">Log out</span> </div>
+            <div class="collapsible-header" id="profimg"><img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""><span>Mr. Ninja</span> <button class="btn waves-effect waves-light green right">Log out</button> </div>
             <div class="collapsible-body">
                 <ul class="collection">
                     <li class="collection-item">Karma level:</li>
@@ -44,37 +41,75 @@
         </li>
     </ul>
     <div class="card-panel col s12 m6 l6">
-        <ul class="collapsible" data-collapsible="expandable" id="profimg">
-            <li>
+        <div class="card">
+            <div class="card-title">
+                <p class="center">Write a post...</p>
+            </div>
+            <div class="card-content">
+                <form action="">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="titl" type="text">
+                            <label for="titl">Title</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea"></textarea>
+                            <label for="textarea1">Description</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn waves-effect waves-light red lighten-2" type="submit" name="action">Submit <i class="material-icons right">send</i> </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <ul class="collapsible" data-collapsible="accordion" id="profimg">
+            <li id="apost">
                 <div class="collapsible-header">
-                    <div class="col m2 l2 s2"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div> <span>The problem 1 is this and that and this and that and this and that weurbweruybvwuerb w iuerfbwi riw reiuwr eciwer cre cq</span>
-                    <br><span class="condensed">on: 1st January 1970 at 00:00</span> </div>
-                <div class="collapsible-body">
-                    <p>This is the description of the complete problem</p>
-                    <br> <i class="material-icons btn btn-floating btn-flat">thumb_up</i> <span>:124</span> <i class="material-icons btn btn-floating btn-flat">thumb_down</i> <span>:32</span>
-                    <br> <span class="condensed">Comments:</span>
-                    <hr>
-                    <ul class="collection">
-                        <li class="collection-item"><img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""><span>: Comment 1</span>
-                            <div class="condensed"> <i class="material-icons btn btn-floating btn-flat">thumb_up</i> <span>:124</span> <i class="material-icons btn btn-floating btn-flat">thumb_down</i> <span>:32</span> </div>
-                        </li>
-                        <li class="collection-item"><img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""><span>: Comment 2</span>
-                            <div class="condensed"> <i class="material-icons btn btn-floating btn-flat">thumb_up</i> <span>:124</span> <i class="material-icons btn btn-floating btn-flat">thumb_down</i> <span>:32</span> </div>
-                        </li>
-                        <li class="collection-item"><img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""><span>: Comment 3</span>
-                            <div class="condensed"> <i class="material-icons btn btn-floating btn-flat">thumb_up</i> <span>:124</span> <i class="material-icons btn btn-floating btn-flat">thumb_down</i> <span>:32</span> </div>
+                    <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div>
+                    <p id="theprob">The problem 1 is this and that and this and that and this and that weurbweruybvwuerb w iuerfbwi riw reiuwr eciwer cre cq</p>
+                    <p class="condensed" id="thedate">on: 1st January 1970 at 00:00</p>
+                </div>
+                <div class="collapsible-body" id="descbody">
+                    <p id="thedesc">This is the description of the complete problem. making it long to see the second line in action.</p>
+                    <br> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a>
+                    <!--<br> <span class="condensed">Comments:</span>
+                    <hr>-->
+                    <ul class="collapsible" data-collapsible="accordion" id="comments">
+                        <li>
+                            <div class="collapsible-header"> Comments: </div>
+                            <div class="collapsible-body">
+                                <ul class="collection">
+                                    <li class="collection-item">
+                                        <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div><a href="">Name of commenter</a>
+                                        <p>: Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr </p>
+                                        <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
+                                        <ul class="collection" id="replytocomments">
+                                            <li class="collection-item">
+                                                <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div><a href="">Name of replyer</a>
+                                                <p>: Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr </p>
+                                                <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div><a href="">Name of commenter</a>
+                                        <p>: Comment 2</p>
+                                        <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div><a href="">Name of commenter</a>
+                                        <p>: Comment 3</p>
+                                        <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </li>
-            <!--<li>
-                <div class="collapsible-header"><img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img col s2" alt=""> <span class="flow-text">The problem is this...</span><br><span class="condensed right">on: 1st January 1970 at 00:00</span> </div>
-                <div class="collapsible-body">
-                   <p class="flow-text">This is the description of the complete problem</p><br>
-                   <i class="material-icons btn btn-floating btn-flat">thumb_up</i> <span>:124</span> <i class="material-icons btn btn-floating btn-flat">thumb_down</i> <span>:32</span>
-                    <hr>
-                </div>
-            </li>-->
         </ul>
     </div>
     <div class="card col m3 l3 hide-on-small-only">

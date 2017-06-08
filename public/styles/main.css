@@ -19,3 +19,33 @@ footer {
     height: auto;
     width: auto;
 }
+
+#apost{
+    border: 1px solid red;
+}
+.collapsible-body {
+    /*border: 1px solid blue;*/
+   padding: 0;
+}
+#thedate{
+    color: #ababab;
+}
+#theprob{
+    font-size: 1.2em;
+    line-height: 140%;
+}
+#thedesc{
+    font-size: 1em;
+    line-height: 110%;
+}
+#descbody{
+    padding: 10px;
+}
+#imgbck{
+    background-color: #efefef;
+    margin: 5px;
+    text-align: center;
+}
+#forprof{
+    margin-bottom: 10px;
+}
