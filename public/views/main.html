@@ -5,33 +5,51 @@
     <meta charset="UTF-8">
     <title>Repair my 'ship</title>
     <!--Styles-->
-    <link rel="stylesheet" href="../../node_modules/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="/nm/materialize-css/dist/css/materialize.min.css">
     <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--JS-->
-    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../node_modules/materialize-css/dist/js/materialize.min.js"></script>
-    <script src="../../node_modules/angular/angular.min.js"></script>
-    <script src="../../node_modules/angular-route/angular-route.min.js"></script>
+    <script src="/nm/jquery/dist/jquery.min.js"></script>
+    <script src="/nm/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="/nm/angular/angular.min.js"></script>
+    <script src="/nm/angular-route/angular-route.min.js"></script>
     <script src="../configs/main.js"></script>
     <script src="../configs/routes.js"></script>
 </head>
 
 <body ng-app="rms">
     <header>
-        <nav>
-            <div class="nav-wrapper red lighten-1"> <a href="#" class="brand-logo">Repair my 'ship</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <!--<li><a href="collapsible.html">JavaScript</a></li>-->
-                </ul>
-            </div>
-        </nav>
+        <div class="navbar-fixed">
+            <nav>
+                <div class="nav-wrapper red lighten-1"> <a href="#" class="brand-logo thin">Repair my 'ship</a> <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="/#!profile" class="thin">About</a></li>
+                        <li><a href="#" class="thin">Settings</a></li>
+                        <!--<li><a href="collapsible.html">JavaScript</a></li>-->
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <ul id="mobile-nav" class="side-nav">
+            <li><a href="/#!profile" class="thin">About</a></li>
+            <li><a href="#" class="thin">Settings</a></li>
+            <!--<li><a href="collapsible.html">JavaScript</a></li>-->
+        </ul>
     </header>
-    <ng-view></ng-view>
+    <section class="container">
+        <ng-view></ng-view>
+    </section>
     <!--<footer class="red lighten-1">
         Made with ❤ from Divyam Nandanwar
     </footer>-->
 </body>
+<script>
+    //$(".button-collapse").sideNav();
+    $(document).ready(function () {
+        $(".button-collapse").sideNav({
+            closeOnClick: true
+        });
+    });
+</script>
 
 </html>
