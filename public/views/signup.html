@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Repair my 'ship</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="/nm/materialize-css/dist/css/materialize.min.css">
+    <!--<link rel="stylesheet" href="../styles/login.css">-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--JS-->
+    <script src="/nm/jquery/dist/jquery.min.js"></script>
+    <script src="/nm/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="/nm/angular/angular.min.js"></script>
+    <script src="/nm/angular-route/angular-route.min.js"></script>
+    <script src="../configs/main.js"></script>
+    <script src="../configs/routes.js"></script>
+    <script src="/nm/angular-swx-session-storage/release/swx-session-storage.min.js"></script>
+    <script src="/nm/moment/moment.js"></script>
+    <script src="/nm/angular-moment/angular-moment.min.js"></script>
+    <script src="../controllers/signupctrl.js"></script>
+    <script src="/nm/ng-file-upload/dist/ng-file-upload-all.min.js"></script>
+    <script src="/nm/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+    
+</head>
+
+<body ng-app="rms" ng-controller="signupctrl">
+    <div class="row">
+        <div class="col s12 m12 l12 xl12 red lighten-1">
+            <h1 class="light center">Repair my 'ship <br><span class="small"><h4>A place to open up</h4></span></h1> </div>
+        <div class="card col s12 m8 l8 xl8 offset-m2 offset-l2 offset-xl2">
+            <h2 class="center card-title">Sign Up</h2>
+            <div class="row">
+                <form action="" name="sform">
+                    <div class="input-field col s12 m6 l6 xl6">
+                        <input id="name" type="text" class="validate" required ng-minlength="3" ng-model="fn">
+                        <label for="name">What you wish to be called? (A name... Maybe full)</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6 xl6">
+                        <input type="date" name="" id="dat" class="datepicker" required ng-model="dob">
+                        <label for="dat">Date Of Birth</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6 xl6">
+                        <input id="email" type="email" class="validate" required ng-model="semail">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6 xl6">
+                        <input id="password" type="password" class="validate" required ng-model="passwd" ng-minlength='6'>
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="input-field col s12 m6 l6 xl6">
+                        <select ng-model="gender" required>
+                            <option value="" disabled selected>Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            <option value="Prefer not to tell">Prefer not to tell</option>
+                        </select>
+                        <!--<label>Gender</label>-->
+                    </div>
+                    <div class="input-field col s12 m6 l6 xl6">
+                        <textarea id="bio" class="materialize-textarea" ng-model="bio"></textarea>
+                        <label for="bio">A few words to describe yourself...</label>
+                    </div>
+                    <!--<input type="submit" value="Continue" ng-click="signup()" class="btn right" ng-disabled="sform.$invalid">-->
+                </form>
+                <button class="btn right" ng-click="signup()" ng-disabled="sform.$invalid">Continue</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 100
+        , min: [1900, 0, 1]
+        , max: true
+        , today: '' // Creates a dropdown of 15 years to control year
+    });
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>
+
+</html>

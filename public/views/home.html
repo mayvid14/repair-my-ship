@@ -1,125 +1,152 @@
-<script>
-    $('.collapsible').collapsible();
-</script>
-<div class="row">
+<div class="row" ng-controller="homectrl">
     <div class="card col m3 l3 hide-on-small-only lp">
         <div class="card-image">
-            <div id="imgbck"><img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" alt="" class="responsive-img"></div>
+            <div id="imgbck"><img ng-src="{{currUser.dp}}" alt="" class="responsive-img"></div>
         </div>
         <div class="card-content">
             <ul class="collection">
-                <li class="collection-item"><span class="card-title">Mr. Ninja</span></li>
-                <li class="collection-item">Karma level:</li>
-                <li class="collection-item"><i class="material-icons">thumb_up</i> :124</li>
-                <li class="collection-item"><i class="material-icons">thumb_down</i> :32</li>
+                <li class="collection-item"><span class="card-title">{{currUser.fullname | initcap}}</span></li>
+                <li class="collection-item">Karma level:{{currUser.karmalvl}}</li>
+                <li class="collection-item">Posts <i class="material-icons">thumb_up</i> :{{puv.length}}</li>
+                <li class="collection-item">Posts <i class="material-icons">thumb_down</i> :{{pdv.length}}</li>
+                <li class="collection-item">Comments <i class="material-icons">thumb_up</i> :{{cuv.length}}</li>
+                <li class="collection-item">Comments <i class="material-icons">thumb_down</i> :{{cdv.length}}</li>
                 <li class="collection-item"><a href="/#!profile">View profile</a></li>
-            </ul> <button class="btn waves-effect waves-light green">Log out</button> </div>
+            </ul>
+            <button class="btn waves-effect waves-light green" ng-click="logout()">Log out</button>
+        </div>
     </div>
     <ul class="collapsible col s12 hide-on-med-and-up" data-collapsible="accordion">
         <li>
-            <div class="collapsible-header" id="profimg"><img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""><span>Mr. Ninja</span> <button class="btn waves-effect waves-light green right">Log out</button> </div>
+            <div class="collapsible-header"><img ng-src="{{currUser.dp}}" class="responsive-img" alt="" id="profimg"><span>{{currUser.fullname | initcap}}</span>
+                <button class="btn waves-effect waves-light green right" ng-click="logout()">Log out</button>
+            </div>
             <div class="collapsible-body">
                 <ul class="collection">
-                    <li class="collection-item">Karma level:</li>
-                    <li class="collection-item"><i class="material-icons">thumb_up</i> :124</li>
-                    <li class="collection-item"><i class="material-icons">thumb_down</i> :32</li>
+                    <li class="collection-item">Karma level:{{currUser.karmalvl}}</li>
+                    <li class="collection-item">Posts <i class="material-icons">thumb_up</i> :{{puv.length}}</li>
+                    <li class="collection-item">Posts <i class="material-icons">thumb_down</i> :{{pdv.length}}</li>
+                    <li class="collection-item">Comments <i class="material-icons">thumb_up</i> :{{cuv.length}}</li>
+                    <li class="collection-item">Comments <i class="material-icons">thumb_down</i> :{{cdv.length}}</li>
                     <li class="collection-item"><a href="/#!profile">View profile</a></li>
                 </ul>
             </div>
         </li>
     </ul>
-    <ul class="collapsible col s12 hide-on-med-and-up" data-collapsible="accordion">
-        <li>
-            <div class="collapsible-header"> <span class="thin">Topics</span> </div>
-            <div class="collapsible-body">
-                <ul class="collection">
-                    <li class="collection-item">Item 1</li>
-                    <li class="collection-item">Item 2</li>
-                    <li class="collection-item">Item 3</li>
-                </ul>
-            </div>
-        </li>
-    </ul>
-    <div class="card-panel col s12 m6 l6">
+    <div class="card-panel col s12 m9 l9 xl9">
         <div class="card">
             <div class="card-title">
                 <p class="center">Write a post...</p>
             </div>
             <div class="card-content">
-                <form action="">
+                <form action="" name="postup">
                     <div class="row">
-                        <div class="input-field col s12">
-                            <input id="titl" type="text">
+                        <div class="input-field col s12 m6 l6 xl6">
+                            <input id="titl" type="text" required ng-model="postTitle">
                             <label for="titl">Title</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <div class="input-field col s12 m6 l6 xl6">
+                            <textarea id="textarea1" class="materialize-textarea" required ng-model="postDescription"></textarea>
                             <label for="textarea1">Description</label>
+                        </div> <img ng-show="postup.file.$valid" ngf-thumbnail="postPic" class="thumb responsive-img col s12 m6 l6 xl6"> </div>
+                    <div class="row">
+                        <div class="file-field input-field">
+                            <div class="btn waves-effect waves-light red lighten-1"> <span>Upload an image?</span>
+                                <input type="file" ngf-select ng-model="postPic" name="file" accept="image/*" ngf-max-size="10MB"> </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text"> </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <button class="btn waves-effect waves-light red lighten-2" type="submit" name="action">Submit <i class="material-icons right">send</i> </button>
+                </form>
+                <button class="btn waves-effect waves-light red lighten-1" ng-disabled="postup.$invalid" ng-click="postupload()">Submit <i class="material-icons right">send</i> </button>
+            </div>
+        </div>
+        <!--<ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">one</a></li>
+            <li><a href="#!">two</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">three</a></li>
+        </ul>-->
+        <nav class="">
+            <div class="nav-wrapper">
+                <form>
+                    <div class="input-field col s6 m6 l6 xl6">
+                        <input id="search" type="search" required ng-model="psrch.title">
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label> <i class="material-icons">close</i> </div>
+                    <div class="input-field col s6 m6 l6 xl6">
+                        <select ng-model="psorter">
+                            <option value="" disabled selected>Sort as posted</option>
+                            <option value="-createdOn">Latest first</option>
+                            <option value="title">Sort by title</option>
+                            <option value="-uv.length">Most liked first</option>
+                            <option value="-(uv.length-dv.length)">Most engaging first</option>
+                        </select>
+                        <!--<label>Sort by:</label>-->
                     </div>
                 </form>
             </div>
-        </div>
-        <ul class="collapsible" data-collapsible="accordion" id="profimg">
-            <li id="apost">
-                <div class="collapsible-header">
-                    <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div>
-                    <p id="theprob">The problem 1 is this and that and this and that and this and that weurbweruybvwuerb w iuerfbwi riw reiuwr eciwer cre cq</p>
-                    <p class="condensed" id="thedate">on: 1st January 1970 at 00:00</p>
-                </div>
-                <div class="collapsible-body" id="descbody">
-                    <p id="thedesc">This is the description of the complete problem. making it long to see the second line in action.</p>
-                    <br> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a>
-                    <!--<br> <span class="condensed">Comments:</span>
-                    <hr>-->
-                    <ul class="collapsible" data-collapsible="accordion" id="comments">
-                        <li>
-                            <div class="collapsible-header"> Comments: </div>
-                            <div class="collapsible-body">
-                                <ul class="collection">
-                                    <li class="collection-item">
-                                        <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div><a href="">Name of commenter</a>
-                                        <p>: Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr </p>
-                                        <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
-                                        <ul class="collection" id="replytocomments">
-                                            <li class="collection-item">
-                                                <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div><a href="">Name of replyer</a>
-                                                <p>: Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr </p>
-                                                <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div><a href="">Name of commenter</a>
-                                        <p>: Comment 2</p>
-                                        <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
-                                    </li>
-                                    <li class="collection-item">
-                                        <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div><a href="">Name of commenter</a>
-                                        <p>: Comment 3</p>
-                                        <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="card col m3 l3 hide-on-small-only">
-        <div class="card-title"> <span class="thin">Topics</span> </div>
-        <div class="card-content">
-            <ul class="collection">
-                <li class="collection-item">Item 1</li>
-                <li class="collection-item">Item 2</li>
-                <li class="collection-item">Item 3</li>
-            </ul>
+        </nav>
+        <!--<div class="card-panel">
+            <div class="input-field col s6 m6 l6 xl6">
+                <select ng-model="psorter">
+                    <option value="" disabled selected>As posted</option>
+                    <option value="-createdOn">Latest</option>
+                    <option value="title">Title</option>
+                    <option value="-uv.length">Most liked</option>
+                    <option value="-(uv.length-dv.length)">Most engaging</option>
+                </select>
+                <label>Sort by:</label>
+            </div>
+        </div>-->
+        <!--<span class="btn" ng-click='load()'>Load Posts</span>-->
+        <div class="card">
+            <div class="card-content">
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li id="apost" ng-repeat="post in postArr | orderBy : psorter|filter:psrch">
+                        <div class="collapsible-header" ng-click="getComments(post._id)">
+                            <div class="col m2 l2 s2"> <img ng-src="{{post.userId.dp}}" class="responsive-img" alt=""></div> <a href="">{{post.userId.fullname | initcap}}</a>
+                            <p id="theprob">{{post.title}}</p>
+                            <p class="condensed" id="thedate">{{post.createdOn | getDur}}</p>
+                        </div>
+                        <div class="collapsible-body" id="descbody">
+                            <p id="thedesc">{{post.description}}</p> <img ng-show="post.image" ng-src="{{post.image}}" class="responsive-img" alt="" id="descpic">
+                            <br> <a class="btn btn-flat" ng-click="uvpost(currUser._id,post._id)" ng-disabled="check(currUser._id,post.uv)"><i class="material-icons">thumb_up</i> <span>:{{post.uv.length}}</span></a> <a class="btn btn-flat" ng-click="dvpost(currUser._id,post._id)" ng-disabled="check(currUser._id,post.dv)"><i class="material-icons">thumb_down</i> <span>:{{post.dv.length}}</span></a><span>Comments:</span>
+                            <ul class="collection">
+                                <li class="collection-item" ng-repeat="comme in commes | orderBy : 'createdOn'">
+                                    <div class="col m2 l2 s2"> <img src="{{comme.userId.dp}}" class="responsive-img" alt=""> </div><a href="">{{comme.userId.fullname | initcap}}</a><span><small> ({{comme.createdOn | getDur}})</small></span>
+                                    <p>: {{comme.comment}} </p>
+                                    <div class="condensed"> <a class="btn btn-flat" ng-click="uvcomment(currUser._id,comme._id)" ng-disabled="check(currUser._id,comme.uv)"><i class="material-icons">thumb_up</i> <span>:{{comme.uv.length}}</span></a> <a class="btn btn-flat" ng-click="dvcomment(currUser._id,comme._id)" ng-disabled="check(currUser._id,comme.dv)"><i class="material-icons">thumb_down</i> <span>:{{comme.dv.length}}</span></a> </div>
+                                    <!--<ul class="collection" id="replytocomments">
+                                <li class="collection-item">
+                                    <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt="" id="profimg"> </div><a href="">Name of replyer</a>
+                                    <p>: Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr </p>
+                                    <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
+                                </li>
+                            </ul>-->
+                                </li>
+                                <li class="collection-item">
+                                    <form action="" name="co">
+                                        <div class="input-field col sm11 l11 m11 xl11">
+                                            <input type="text" ng-model="post.comment" id="com" name="com" required>
+                                            <label for="com">Write a comment</label>
+                                        </div>
+                                        <div class="col s1 m1 l1 xl1"> <a class="btn" ng-disabled="co.com.$invalid" ng-click="postComment(post._id,post.comment)"><i class="material-icons">send</i></a> </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('.collapsible').collapsible();
+        $('select').material_select();
+        $(".dropdown-button").dropdown();
+    });
+</script>

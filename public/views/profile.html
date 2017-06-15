@@ -1,54 +1,78 @@
 <h3 class="center">Profile</h3>
-<div class="row">
+<div class="row" ng-controller="profilectrl">
     <div class="col s6 m3 l3 xl3">
         <div class="card-panel">
-            <div id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt=""> </div>
+            <div id="imgbck"> <img ng-src="{{currUser.dp}}" class="responsive-img" alt=""> </div>
         </div>
     </div>
     <div class="col s6 m3 l3 xl3">
         <div class="card-panel">
             <div class="card-content">
-                <p><span class="bold">Karma status : </span></p>
-                <p><span class="bold"><i class="material-icons">thumb_up</i> : 124</span></p>
-                <p><span class="bold"><i class="material-icons">thumb_down</i> : 32</span></p>
-                <p><span class="bold">Posts : </span>1</p>
-                <p><span class="bold">Comments : </span>1</p>
+                <p><span class="bold">Karma status : {{currUser.karmalvl}}</span></p>
+                <p><span class="bold">Posts <i class="material-icons">thumb_up</i> : {{stats.postuv.length}}</span></p>
+                <p><span class="bold">Posts <i class="material-icons">thumb_down</i> : {{stats.postdv.length}}</span></p>
+                <p><span class="bold">Comments <i class="material-icons">thumb_up</i> : {{stats.comuv.length}}</span></p>
+                <p><span class="bold">Comments <i class="material-icons">thumb_down</i> : {{stats.comdv.length}}</span></p>
+                <p><span class="bold">Posts : </span>{{posts.length}}</p>
+                <p><span class="bold">Comments : </span>{{comments.length}}</p>
             </div>
         </div>
     </div>
     <div class="col s12 m6 l6 xl6">
         <div class="card-panel">
             <div class="card-content">
-                <p><span>Name : </span>Mr. Ninja's Name</p>
-                <p><span>D.O.B : </span>1st January 1940 <span class="condensed">(77 years old)</span></p>
-                <p><span>Gender : </span>Unknown</p>
-                <p><span>Bio : </span>awehgf wueyg WUYYEFG WUYDG WKFY Wuf weecv hv d hkf h g serg r g g ebg sr gser e revgkegr ker er </p>
-                <p><span>Status : </span>Single</p>
+                <p><span>Name : </span>{{currUser.fullname | initcap}}</p>
+                <p><span>D.O.B : </span>{{currUser.dob | dob}} <span class="condensed">({{age}} years old)</span></p>
+                <p><span>Gender : </span>{{currUser.gender}}</p>
+                <p><span>Bio : </span>{{currUser.bio}}</p>
+                <!--<p><span>Status : </span>Single</p>-->
             </div>
         </div>
     </div>
     <div class="col s12 m12 l12 xl12">
         <div class="card">
             <div class="card-title">
-                <p class="center">Recent comments</p>
+                <p class="center">Your comments</p>
+                <div class="input-field col s6 m6 l6 xl6"> <i class="material-icons prefix">search</i>
+                    <input id="csrch" type="text" class="validate" ng-model="csrch">
+                    <label for="csrch">Search </label>
+                </div>
+                <div class="input-field col s6 m3 offset-m3 l3 offset-l3 xl3 offset-xl3">
+                    <select ng-model="csorter">
+                        <option value="" disabled selected>As posted</option>
+                        <option value="-createdOn">Latest</option>
+                        <option value="comment">Title</option>
+                        <option value="-uv.length">Most upvotes</option>
+                        <option value="-dv.length">Most downvotes</option>
+                    </select>
+                    <label>Sort by:</label>
+                </div>
             </div>
             <div class="card-content">
-                <table>
-                    <tr>
-                        <td id="thedate">On 1st January 1970 at 00:00</td>
-                        <td>Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr kyejr kkf y gereyyg err rg grg sirg srr grg r gr rg reyy rug uyug rrg g </td>
-                        <td><a href="">View Post</a></td>
-                    </tr>
-                    <tr>
-                        <td id="thedate">On 1st January 1970 at 00:00</td>
-                        <td>Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr</td>
-                        <td><a href="">View Post</a></td>
-                    </tr>
-                    <tr>
-                        <td id="thedate">On 1st January 1970 at 00:00</td>
-                        <td>Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr</td>
-                        <td><a href="">View Post</a></td>
-                    </tr>
+                <table class="bordered">
+                    <thead>
+                        <tr>
+                            <th class="col s4 m4 l4 xl4">Posted</th>
+                            <th class="col s4 m4 l4 xl4">Comment</th>
+                            <th class="col s4 m4 l4 xl4">Votes</th>
+                            <!--<th class="col s3 m3 l3 xl3">Link</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="com in comments | orderBy : csorter | filter: csrch">
+                            <td id="thedate" class=" col s4 m4 l4 xl4">{{com.createdOn | getDur}}</td>
+                            <td class=" col s4 m4 l4 xl4"> {{com.comment}}</td>
+                            <td class="col s4 m4 l4 xl4"><i class="material-icons">thumb_up</i>:{{com.uv.length}}
+                                <br><i class="material-icons">thumb_down</i>:{{com.dv.length}}</td>
+                            <!--<td class="col s3 m3 l3 xl3">
+                                <button data-target="commentModal" class="btn btn-flat" ng-click="coinimo(com._id)">View post</button>
+                            </td>-->
+                        </tr>
+                        <tr ng-show="!comments.length">
+                            <td class="col s12 m12 l12 xl12">
+                                <h2 class="center thin">No comments yet</h2> </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -56,27 +80,73 @@
     <div class="col s12 m12 l12 xl12">
         <div class="card">
             <div class="card-title">
-                <p class="center">Recent posts</p>
+                <p class="center">Your posts</p>
+                <div class="input-field col s6 m6 l6 xl6"> <i class="material-icons prefix">search</i>
+                    <input id="psrch" type="text" class="validate" ng-model="psrch">
+                    <label for="psrch">Search </label>
+                </div>
+                <div class="input-field col s6 m3 offset-m3 l3 offset-l3 xl3 offset-xl3">
+                    <select ng-model="psorter">
+                        <option value="" disabled selected>As posted</option>
+                        <option value="-createdOn">Latest</option>
+                        <option value="title">Title</option>
+                        <option value="-uv.length">Most upvotes</option>
+                        <option value="-dv.length">Most downvotes</option>
+                    </select>
+                    <label>Sort by:</label>
+                </div>
             </div>
             <div class="card-content">
-                <table>
-                    <tr>
-                        <td id="thedate">On 1st January 1970 at 00:00</td>
-                        <td>The problem 1 is this and that and this and that and this and that weurbweruybvwuerb w iuerfbwi riw reiuwr eciwer cre cq</td>
-                        <td><a href="">View Post</a></td>
-                    </tr>
-                    <tr>
-                        <td id="thedate">On 1st January 1970 at 00:00</td>
-                        <td>Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr</td>
-                        <td><a href="">View Post</a></td>
-                    </tr>
-                    <tr>
-                        <td id="thedate">On 1st January 1970 at 00:00</td>
-                        <td>Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr</td>
-                        <td><a href="">View Post</a></td>
-                    </tr>
+                <table class="bordered">
+                    <thead>
+                        <tr>
+                            <th class="col s4 m4 l4 xl4">Posted</th>
+                            <th class="col s4 m4 l4 xl4">Title and description</th>
+                            <th class="col s4 m4 l4 xl4">Image attached</th>
+                            <!--<th class="col s3 m3 l3 xl3">Link</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="post in posts | orderBy : psorter | filter:psrch">
+                            <td id="thedate" class=" col s4 m4 l4 xl4">{{post.createdOn | getDur}}</td>
+                            <td class=" col s4 m4 l4 xl4"><strong>{{post.title}} </strong>
+                                <br> {{post.description}}
+                                <br><i class="material-icons">thumb_up</i>:{{post.uv.length}} <i class="material-icons">thumb_down</i>:{{post.dv.length}}</td>
+                            <td class=" col s4 m4 l4 xl4"> <img ng-show="post.image" ng-src="{{post.image}}" class="responsive-img" alt=""></td>
+                            <!--<td class="col s3 m3 l3 xl3">
+                                <button class="btn btn-flat" ng-click="poinimo(post.createdOn,post.title,post.description,post.uv,post.dv,post.image,post._id)">View post</button><a data-target='postModal' class="btn" modal open="openpm" ready="ready()" complete="complete(post_id)" ng-click="poinimo(post.createdOn,post.title,post.description,post.uv,post.dv,post.image,post._id)"> View Post </a> </td>-->
+                        </tr>
+                        <tr ng-show="!posts.length">
+                            <td class="col s12 m12 l12 xl12">
+                                <h2 class="center thin">Nothing posted yet</h2> </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+<!--<div class="carousel" ng-if="ready">
+    <a class="carousel-item" ng-repeat="post in postArr">
+        <div class="card">
+            <div class="col m2 l2 s2"> <img ng-src="{{post.userId.dp}}" class="responsive-img" alt=""></div> <a href="">{{post.userId.fullname | initcap}}</a>
+            <p id="theprob">{{post.title}}</p>
+            <p class="condensed" id="thedate">{{post.createdOn | getDur}}</p>
+            <p id="thedesc">{{post.description}}</p> <img ng-show="post.image" ng-src="{{post.image}}" class="responsive-img" alt="" id="descpic">
+            <br> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:{{post.uv}}</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:{{post.dv}}</span></a><span>Comments:</span>
+            <a class="btn btn-flat" ng-click="getComments(post._id)"> Load comments </a>
+            <ul class="collection">
+                <li class="collection-item" ng-repeat="comme in postArr.co | orderBy : 'createdOn'">
+                    <div class="col m2 l2 s2"> <img src="{{comme.userId.dp}}" class="responsive-img" alt=""> </div><a href="">{{comme.userId.fullname | initcap}}</a><span><small> ({{comme.createdOn | getDur}})</small></span>
+                    <p>: {{comme.comment}} </p>
+                    <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:{{comme.uv}}</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:{{comme.dv}}</span></a> </div>
+                </li>
+            </ul>
+        </div>
+    </a>
+</div>-->
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>

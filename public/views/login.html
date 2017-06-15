@@ -12,10 +12,21 @@
     <script src="/nm/jquery/dist/jquery.min.js"></script>
     <script src="/nm/materialize-css/dist/js/materialize.min.js"></script>
     <script src="/nm/angular/angular.min.js"></script>
+    <script src="/nm/angular-route/angular-route.min.js"></script>
     <script src="../configs/main.js"></script>
+    <script src="../configs/routes.js"></script>
+    <script src="/nm/angular-swx-session-storage/release/swx-session-storage.js"></script>
+    <script src="/nm/moment/moment.js"></script>
+    <script src="/nm/angular-moment/angular-moment.min.js"></script>
+    <script src="../models/loginfac.js"></script>
+    <script src="../controllers/loginctrl.js"></script>
+    <script src="/nm/underscore/underscore-min.js"></script>
+    <script src="/nm/ng-file-upload/dist/ng-file-upload-all.min.js"></script>
+    <script src="/nm/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+    
 </head>
 
-<body ng-app="rms">
+<body ng-app="rms" ng-controller="loginctrl">
     <div class="row">
         <div class="col s12 m8 l8 xl8 hide-on-small-only" id="slide">
             <h1 class="light">Repair my 'ship <br><span class="small"><h4>A place to open up</h4></span></h1>
@@ -26,21 +37,22 @@
         <div class="col m4 l4 xl4 offset-m8 offset-l8 offset-xl8" id="log">
             <h4 class="center">Login </h4>
             <div class="row">
-                <form action="">
+                <form action="" name="loginform">
                     <div class="input-field col s12">
-                        <input id="email" type="email" class="validate">
+                        <input id="email" type="email" class="validate" ng-model="lemail" required>
                         <label for="email">Email</label>
                     </div>
                     <div class="input-field col s12">
-                        <input id="password" type="password" class="validate">
+                        <input id="password" type="password" class="validate" ng-model="passwd" ng-minlength="6" required>
                         <label for="password">Password</label>
                     </div>
-                    <button class="btn waves-effect waves-light red lighten-2 right" type="submit" name="action">Submit <i class="material-icons right">send</i> </button>
+                    <!--<button class="btn waves-effect waves-light red lighten-2 right" ng-click="login()">Submit <i class="material-icons right">send</i> </button>-->
+                    <input type="submit" value="Submit" ng-click="login()" class="btn right" ng-disabled="loginform.$invalid">
                 </form>
             </div>
             <div class="row center"> <a href="/signup">Not a member already? Sign up</a> </div>
             <div class="row center">
-                <button class="btn btn-flat waves-effect waves-dark">Continue Anonymously</button>
+                <button class="btn btn-flat waves-effect waves-dark" ng-click="anoncont()">Continue Anonymously</button>
             </div>
         </div>
     </div>

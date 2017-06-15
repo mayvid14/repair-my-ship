@@ -1,0 +1,28 @@
+<div id="commentModal" class="modal">
+    <div class="modal-content">
+        <div>
+            <div class="col m2 l2 s2"> <img ng-src="{{post.userId.dp}}" class="responsive-img" alt=""></div> <a href="">{{post.userId.fullname | initcap}}</a>
+            <p id="theprob">{{post.title}}</p>
+            <p class="condensed" id="thedate">{{post.createdOn | getDur}}</p>
+        </div>
+        <div class="collapsible-body" id="descbody">
+            <p id="thedesc">{{post.description}}</p> <img ng-show="post.image" ng-src="{{post.image}}" class="responsive-img" alt="" id="descpic">
+            <br> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:{{post.uv}}</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:{{post.dv}}</span></a><span>Comments:</span>
+            <!--<a class="btn btn-flat" ng-click="getComments(post._id)"> Load comments </a>-->
+            <ul class="collection">
+                <li class="collection-item" ng-repeat="comme in commes | orderBy : 'createdOn'">
+                    <div class="col m2 l2 s2"> <img src="{{comme.userId.dp}}" class="responsive-img" alt=""> </div><a href="">{{comme.userId.fullname | initcap}}</a><span><small> ({{comme.createdOn | getDur}})</small></span>
+                    <p>: {{comme.comment}} </p>
+                    <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:{{comme.uv}}</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:{{comme.dv}}</span></a> </div>
+                    <!--<ul class="collection" id="replytocomments">
+                                <li class="collection-item">
+                                    <div class="col m2 l2 s2" id="imgbck"> <img src="http://icon-icons.com/icons2/643/PNG/512/ninja-cat-figure-avatar-face_icon-icons.com_59284.png" class="responsive-img" alt="" id="profimg"> </div><a href="">Name of replyer</a>
+                                    <p>: Comment 1 kuyafeuryrfbeyr ekury guf eruyu gerkuuf eur usr </p>
+                                    <div class="condensed"> <a class="btn btn-flat"><i class="material-icons">thumb_up</i> <span>:124</span></a> <a class="btn btn-flat"><i class="material-icons">thumb_down</i> <span>:32</span></a> </div>
+                                </li>
+                            </ul>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

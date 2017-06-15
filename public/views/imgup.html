@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Repair my 'ship</title>
+    <!--Styles-->
+    <link rel="stylesheet" href="/nm/materialize-css/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="../styles/imgup.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--JS-->
+    <script src="/nm/jquery/dist/jquery.min.js"></script>
+    <script src="/nm/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="/nm/angular/angular.min.js"></script>
+    <script src="/nm/angular-route/angular-route.min.js"></script>
+    <script src="/nm/ng-file-upload/dist/ng-file-upload-all.min.js"></script>
+    <script src="/nm/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+    <script src="../configs/main.js"></script>
+    <script src="../configs/routes.js"></script>
+    <script src="/nm/angular-swx-session-storage/release/swx-session-storage.min.js"></script>
+    <script src="/nm/moment/moment.js"></script>
+    <script src="/nm/angular-moment/angular-moment.min.js"></script>
+    <script src="../controllers/imgctrl.js"></script>
+    
+</head>
+
+<body ng-app="rms" ng-controller="imgctrl">
+    <div class="row">
+        <div class="col s12 m12 l12 xl12 red lighten-1">
+            <h1 class="light center">Repair my 'ship <br><span class="small"><h4>A place to open up</h4></span></h1> </div>
+        <div class="card-panel col s12 m8 l8 xl8 offset-m2 offset-l2 offset-xl2">
+            <form name="imag">
+                <button ngf-select class="btn" ng-model="picFile" accept="image/*"> Select your dp</button>
+                <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea col s12 m12 l12 xl12" ngf-accept="'image/*'" ngf-max-size="5MB">
+                    <img-crop image="picFile  | ngfDataUrl" result-image="croppedDataUrl" ng-init="croppedDataUrl=''" class="col s6 l6 m6 xl6 offset-s6 offset-m6 offset-l6 offset-xl6"> </img-crop>
+                </div>
+                <div> <img ng-src="{{croppedDataUrl}}" /> </div>
+                 <span class="progress" ng-show="progress >= 0">
+          <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                </span></form>
+                <button ng-click="upl(croppedDataUrl, picFile.name)" class="btn">Submit</button>
+        </div>
+    </div>
+</body>
+<script>
+</script>
+
+</html>
