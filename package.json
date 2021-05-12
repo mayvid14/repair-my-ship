@@ -32,7 +32,7 @@
     "ng-file-upload": "^12.2.13",
     "ng-img-crop": "^0.2.0",
     "ng-storage": "^0.3.2",
-    "nodemailer": "^6.4.11",
+    "nodemailer": "^6.4.16",
     "underscore": "^1.10.2"
   },
   "devDependencies": {
