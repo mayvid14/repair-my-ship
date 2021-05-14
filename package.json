@@ -33,7 +33,7 @@
     "ng-img-crop": "^0.2.0",
     "ng-storage": "^0.3.2",
     "nodemailer": "^6.4.16",
-    "underscore": "^1.10.2"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "angular-swx-session-storage": "^1.0.0"
